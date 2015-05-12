@@ -25,8 +25,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.xiaozhi.beautygallery.R;
 import com.xiaozhi.beautygallery.adapter.MyGridViewAdapter;
+import com.xiaozhi.beautygallery.adapter.MyGridViewAdapter.LoadListener;
 import com.xiaozhi.beautygallery.domain.Image;
 import com.xiaozhi.beautygallery.util.VolleyUtil;
+import com.xiaozhi.beautygallery.view.FooterView;
 /*
  * 显示图片列表Fragment
  */
@@ -55,6 +57,13 @@ public class FragmentMain extends Fragment {
 	private void initViews() {
 		mGridView = (GridView) view.findViewById(R.id.gridView);
 		mAdapter = new MyGridViewAdapter(getActivity(), mListImages);
+		mAdapter.setLoadListener(new LoadListener() {
+			
+			@Override
+			public void onLoad() {
+				loadNextPage();
+			}
+		});
 		mGridView.setAdapter(mAdapter);
 		mFrame = (PtrFrameLayout) view.findViewById(R.id.rotate_header_grid_view_frame);
         StoreHouseHeader header = new StoreHouseHeader(getActivity());
@@ -94,6 +103,8 @@ public class FragmentMain extends Fragment {
 				VolleyUtil.parseItems(mListImages, jsonObject);
 				mFrame.refreshComplete();
 				updateAdapter();
+				pn += VolleyUtil.PAGE_SIZE;
+				mAdapter.setFooterViewStatus(FooterView.MORE);
 			}
 		}, new Response.ErrorListener(){
 
@@ -103,6 +114,16 @@ public class FragmentMain extends Fragment {
 			}
 		});
 		VolleyUtil.getInstance().addToRequestQueue(request);
+	}
+	
+	/**
+	 * 加载下一页数据
+	 */
+	private void loadNextPage(){
+		if (mAdapter != null) {
+			mAdapter.setFooterViewStatus(FooterView.LOADING);
+		}
+		loadItems();
 	}
 	
 	private void updateAdapter(){
