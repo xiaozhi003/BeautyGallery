@@ -5,7 +5,6 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -26,7 +26,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.xiaozhi.beautygallery.R;
 import com.xiaozhi.beautygallery.adapter.MyGridViewAdapter;
 import com.xiaozhi.beautygallery.domain.Image;
-import com.xiaozhi.beautygallery.util.Logs;
 import com.xiaozhi.beautygallery.util.VolleyUtil;
 /*
  * 显示图片列表Fragment
@@ -92,14 +91,6 @@ public class FragmentMain extends Fragment {
 
 			@Override
 			public void onResponse(JSONObject jsonObject) {
-				String jsonString = null;
-				try {
-					jsonString = new String(jsonObject.toString().getBytes(), "GBK");
-				} catch (UnsupportedEncodingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				Logs.i("json:" + jsonString);
 				VolleyUtil.parseItems(mListImages, jsonObject);
 				mFrame.refreshComplete();
 				updateAdapter();
@@ -108,7 +99,7 @@ public class FragmentMain extends Fragment {
 
 			@Override
 			public void onErrorResponse(VolleyError arg0) {
-				
+				Toast.makeText(getActivity(), "加载失败", Toast.LENGTH_SHORT).show();
 			}
 		});
 		VolleyUtil.getInstance().addToRequestQueue(request);
