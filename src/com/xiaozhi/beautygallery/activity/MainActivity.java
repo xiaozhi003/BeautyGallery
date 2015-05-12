@@ -2,17 +2,42 @@ package com.xiaozhi.beautygallery.activity;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.xiaozhi.beautygallery.R;
+import com.xiaozhi.beautygallery.fragment.FragmentMain;
 
 public class MainActivity extends SingleFragmentActivity {
+
+	private Toolbar mToolbar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		initViews();
+	}
+
+	protected void initViews() {
+		mToolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(mToolbar);
+		mToolbar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				switch (item.getItemId()) {
+				case R.id.action_more:
+					Toast.makeText(MainActivity.this, "more", Toast.LENGTH_SHORT).show();
+					break;
+				default:
+					break;
+				}
+				return false;
+			}
+		});
 	}
 
 	@Override
@@ -28,7 +53,7 @@ public class MainActivity extends SingleFragmentActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (id == R.id.action_more) {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -37,6 +62,6 @@ public class MainActivity extends SingleFragmentActivity {
 	@Override
 	protected Fragment createFragment() {
 		// TODO Auto-generated method stub
-		return null;
+		return new FragmentMain();
 	}
 }
