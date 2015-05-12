@@ -16,7 +16,7 @@
 
 /*
  * This file is auto-generated. DO NOT MODIFY!
- * The source Renderscript file: E:\\eclipse\\workplace-test2\\BeautyGallery\\src\\blur.rs
+ * The source Renderscript file: D:\\workplace-android\\workplace-work1\\BeautyGallery\\src\\blur.rs
  */
 
 package com.enrique.stackblur;

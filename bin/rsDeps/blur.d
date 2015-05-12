@@ -1,6 +1,6 @@
-E:\eclipse\workplace-test2\BeautyGallery\bin\res\bc\raw\blur.bc \
-  E:\eclipse\workplace-test2\BeautyGallery\gen\com\enrique\stackblur\ScriptC_blur.java: \
-  E:\eclipse\workplace-test2\BeautyGallery\src\blur.rs \
+D:\workplace-android\workplace-work1\BeautyGallery\bin\res\bc\raw\blur.bc \
+  D:\workplace-android\workplace-work1\BeautyGallery\gen\com\enrique\stackblur\ScriptC_blur.java: \
+  D:\workplace-android\workplace-work1\BeautyGallery\src\blur.rs \
   D:\program\ files\android-sdk-windows\build-tools\21.1.1\renderscript\include\rs_core.rsh \
   D:\program\ files\android-sdk-windows\build-tools\21.1.1\renderscript\include/rs_types.rsh \
   D:\program\ files\android-sdk-windows\build-tools\21.1.1\renderscript\clang-include\stdbool.h \
