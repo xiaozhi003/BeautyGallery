@@ -2,6 +2,7 @@ package com.xiaozhi.beautygallery.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -74,22 +75,36 @@ public class WelcomeActivity extends Activity {
 	private void startAnimation() {
 		// 图片缩放动画
 		ObjectAnimator imageAnimator = ObjectAnimator.ofFloat(mWelcomeImg,
-				"scaleX", 1.0f, 1.1f).setDuration(2000);
+				"scaleX", 1.0f, 1.1f);
 		ObjectAnimator imageAnimator1 = ObjectAnimator.ofFloat(mWelcomeImg,
-				"scaleY", 1.0f, 1.1f).setDuration(2000);
-		imageAnimator.start();
-		imageAnimator1.start();
-		imageAnimator.addListener(new AnimatorListenerAdapter() {
+				"scaleY", 1.0f, 1.1f);
+		AnimatorSet set = new AnimatorSet();
+		set.playTogether(imageAnimator,imageAnimator1);
+		set.setDuration(2000);
+		set.addListener(new AnimatorListenerAdapter() {
 
+			@Override
+			public void onAnimationEnd(Animator animation) {
+				blurAnimation();
+			}
+		});
+		set.start();
+		// 由于图片放大相应的模糊的View也需要同样放大
+		mBlurView.setScaleX(1.1f);
+		mBlurView.setScaleY(1.1f);
+	}
+	
+	private void blurAnimation(){
+		ObjectAnimator blurAnimator = ObjectAnimator.ofFloat(mBlurView,
+				"alpha", 0f, 0.8f).setDuration(3000);
+		blurAnimator.addListener(new AnimatorListenerAdapter() {
 			@Override
 			public void onAnimationEnd(Animator animation) {
 				startActivity(new Intent(mActivity, MainActivity.class));
 				mActivity.finish();
 			}
 		});
-		// 由于图片放大相应的模糊的View也需要同样放大
-		mBlurView.setScaleX(1.1f);
-		mBlurView.setScaleY(1.1f);
+		blurAnimator.start();
 	}
 
 	/**
