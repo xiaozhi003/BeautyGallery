@@ -2,12 +2,12 @@ package com.xiaozhi.beautygallery.activity;
 
 import android.app.Fragment;
 
+import com.xiaozhi.beautygallery.fragment.BeautyFragment;
+
 public class BeautyActivity extends SingleFragmentActivity {
 
 	@Override
 	protected Fragment createFragment() {
-		// TODO Auto-generated method stub
-		return null;
+		return BeautyFragment.newInstance(getIntent().getStringExtra(BeautyFragment.URL));
 	}
-	
 }

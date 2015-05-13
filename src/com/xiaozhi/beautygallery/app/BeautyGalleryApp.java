@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.xiaozhi.beautygallery.util.CustomUtil;
 import com.xiaozhi.beautygallery.util.ImageLoaderUtil;
 import com.xiaozhi.beautygallery.util.Logs;
 import com.xiaozhi.beautygallery.util.VolleyUtil;
@@ -36,6 +37,12 @@ public class BeautyGalleryApp extends Application{
 		initVolley();
 		// 初始化Universal-ImageLoader
 		initImageLoader();
+		
+		initCustomUtil();
+	}
+
+	private void initCustomUtil() {
+		CustomUtil.getInstance().init(getApplicationContext());
 	}
 
 	private void initImageLoader() {
@@ -65,10 +72,7 @@ public class BeautyGalleryApp extends Application{
 		.defaultDisplayImageOptions(DisplayImageOptions.createSimple())
 		.imageDownloader(
 				new BaseImageDownloader(getApplicationContext(),
-						5 * 1000, 30 * 1000)).writeDebugLogs() // Remove
-						// for
-						// release
-						// app
+						5 * 1000, 30 * 1000))/*.writeDebugLogs()*/
 						.build();// 开始构建
 		ImageLoaderUtil.setConfiguration(configuration);
 		ImageLoaderUtil.getInstance().init(getApplicationContext());

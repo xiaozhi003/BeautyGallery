@@ -31,6 +31,10 @@
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".activity.BeautyActivity"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

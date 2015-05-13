@@ -8,7 +8,7 @@
     ripple:rv_rippleDuration="100"
     ripple:rv_type="rectangle"
     ripple:rv_zoom="true"
-    ripple:rv_zoomDuration="200" >
+    ripple:rv_zoomDuration="150" >
 
     <ImageView
         android:id="@+id/imageView"

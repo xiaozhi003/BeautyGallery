@@ -3,7 +3,9 @@ package com.xiaozhi.beautygallery.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,7 +22,9 @@ import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.xiaozhi.beautygallery.R;
+import com.xiaozhi.beautygallery.activity.BeautyActivity;
 import com.xiaozhi.beautygallery.domain.Image;
+import com.xiaozhi.beautygallery.fragment.BeautyFragment;
 import com.xiaozhi.beautygallery.util.ImageLoaderUtil;
 import com.xiaozhi.beautygallery.util.Logs;
 import com.xiaozhi.beautygallery.util.MeasureUtil;
@@ -119,7 +123,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 						.getUrl());
 				loadImage(holder.mImageView, position);
 			}
-		}else if (getItemViewType(position) == VIEW_TYPE_FOOT && position != 0) {
+		} else if (getItemViewType(position) == VIEW_TYPE_FOOT && position != 0) {
 			setFooterViewStatus(FooterView.MORE);
 		}
 	}
@@ -162,6 +166,22 @@ public class MyGridViewAdapter extends BaseAdapter {
 
 			holder.mImageView = (ImageView) convertView
 					.findViewById(R.id.imageView);
+			holder.mImageView.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(final View v) {
+					new Handler().postDelayed(new Runnable() {
+						
+						@Override
+						public void run() {
+							Intent intent = new Intent(mContext, BeautyActivity.class);
+							intent.putExtra(BeautyFragment.URL, v
+									.getTag(R.id.imageView).toString());
+							mContext.startActivity(intent);
+						}
+					}, 200);
+				}
+			});
 			convertView.setTag(holder);
 		}
 		return convertView;

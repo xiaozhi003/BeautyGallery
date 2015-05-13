@@ -15,5 +15,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0"/>
+    
+    <TextView
+        android:id="@+id/blurTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        android:alpha="0"
+        android:gravity="center"
+        android:text="美 女 图"
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
 </FrameLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/pop_win_bg"
+    android:orientation="vertical"
+    android:padding="@dimen/image_padding" >
+
+    <GridView
+        android:id="@+id/popGridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:focusable="false"
+        android:gravity="center"
+        android:horizontalSpacing="@dimen/image_padding"
+        android:listSelector="@drawable/shape_more_pop"
+        android:numColumns="5"
+        android:verticalSpacing="@dimen/image_padding" />
+
+</LinearLayout>

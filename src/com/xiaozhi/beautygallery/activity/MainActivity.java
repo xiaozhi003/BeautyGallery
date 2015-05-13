@@ -6,14 +6,16 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
 import com.xiaozhi.beautygallery.R;
 import com.xiaozhi.beautygallery.fragment.FragmentMain;
+import com.xiaozhi.beautygallery.view.MorePopWindow;
 
 public class MainActivity extends SingleFragmentActivity {
 
 	private Toolbar mToolbar;
+	private MorePopWindow mMorePopWindow;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +25,16 @@ public class MainActivity extends SingleFragmentActivity {
 
 	protected void initViews() {
 		mToolbar = (Toolbar) findViewById(R.id.toolbar);
+		mToolbar.setVisibility(View.VISIBLE);
 		setSupportActionBar(mToolbar);
+		mMorePopWindow = new MorePopWindow(this);
 		mToolbar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-			
+
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				switch (item.getItemId()) {
 				case R.id.action_more:
-					Toast.makeText(MainActivity.this, "more", Toast.LENGTH_SHORT).show();
+					showMorePopWindow();
 					break;
 				default:
 					break;
@@ -38,6 +42,12 @@ public class MainActivity extends SingleFragmentActivity {
 				return false;
 			}
 		});
+
+	}
+
+	protected void showMorePopWindow() {
+		// 显示窗口
+		mMorePopWindow.showAsDropDown(mToolbar);
 	}
 
 	@Override

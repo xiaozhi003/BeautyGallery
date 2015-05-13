@@ -27,6 +27,7 @@ import com.xiaozhi.beautygallery.R;
 import com.xiaozhi.beautygallery.adapter.MyGridViewAdapter;
 import com.xiaozhi.beautygallery.adapter.MyGridViewAdapter.LoadListener;
 import com.xiaozhi.beautygallery.domain.Image;
+import com.xiaozhi.beautygallery.util.CustomUtil;
 import com.xiaozhi.beautygallery.util.VolleyUtil;
 import com.xiaozhi.beautygallery.view.FooterView;
 /*
@@ -37,7 +38,8 @@ public class FragmentMain extends Fragment {
 	private static final String TAG = "FragmentMain";
 	final String[] mStringList = {"Alibaba", "TMALL 11-11"};
 	private int pn;// 加载的图片数量
-	private String tag2 = "性感美女";
+	private String tag2;
+	private String mOldTag2;
 	
 	private GridView mGridView;
 	private MyGridViewAdapter mAdapter;
@@ -55,6 +57,11 @@ public class FragmentMain extends Fragment {
 	}
 
 	private void initViews() {
+		tag2 = CustomUtil.getInstance().getString(VolleyUtil.TAG2);
+		if (tag2 == null) {
+			tag2 = VolleyUtil.TAG2_DEFAULT;
+			CustomUtil.getInstance().save(VolleyUtil.TAG2, tag2);
+		}
 		mGridView = (GridView) view.findViewById(R.id.gridView);
 		mAdapter = new MyGridViewAdapter(getActivity(), mListImages);
 		mAdapter.setLoadListener(new LoadListener() {
@@ -87,6 +94,8 @@ public class FragmentMain extends Fragment {
 
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
+            	mListImages.clear();
+            	pn = 0;
                 loadItems();
             }
         });
@@ -103,7 +112,6 @@ public class FragmentMain extends Fragment {
 				VolleyUtil.parseItems(mListImages, jsonObject);
 				mFrame.refreshComplete();
 				updateAdapter();
-				pn += VolleyUtil.PAGE_SIZE;
 				mAdapter.setFooterViewStatus(FooterView.MORE);
 			}
 		}, new Response.ErrorListener(){
@@ -123,6 +131,7 @@ public class FragmentMain extends Fragment {
 		if (mAdapter != null) {
 			mAdapter.setFooterViewStatus(FooterView.LOADING);
 		}
+		pn += VolleyUtil.PAGE_SIZE;
 		loadItems();
 	}
 	

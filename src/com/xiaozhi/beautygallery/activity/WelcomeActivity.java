@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
+import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,9 +15,11 @@ import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.enrique.stackblur.StackBlurManager;
 import com.xiaozhi.beautygallery.R;
@@ -30,6 +34,7 @@ public class WelcomeActivity extends Activity {
 	private WelcomeActivity mActivity;
 	private ImageView mWelcomeImg;
 	private View mBlurView;
+	private TextView mBlurTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,7 @@ public class WelcomeActivity extends Activity {
 	private void initViews() {
 		mWelcomeImg = (ImageView) findViewById(R.id.welcomeImg);
 		mBlurView = findViewById(R.id.blurView);
+		mBlurTextView = (TextView) findViewById(R.id.blurTextView);
 
 		mWelcomeImg.getViewTreeObserver().addOnPreDrawListener(
 				new OnPreDrawListener() {
@@ -66,7 +72,13 @@ public class WelcomeActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		startAnimation();
+		new Handler().postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				startAnimation();
+			}
+		}, 500);
 	}
 
 	/**
@@ -95,16 +107,39 @@ public class WelcomeActivity extends Activity {
 	}
 	
 	private void blurAnimation(){
-		ObjectAnimator blurAnimator = ObjectAnimator.ofFloat(mBlurView,
-				"alpha", 0f, 0.8f).setDuration(3000);
-		blurAnimator.addListener(new AnimatorListenerAdapter() {
+		ObjectAnimator textAnim = ObjectAnimator.ofFloat(mBlurTextView, "text", 0.0f,1.f).setDuration(2000);
+		textAnim.start();
+		textAnim.addUpdateListener(new AnimatorUpdateListener() {
+			
+			@Override
+			public void onAnimationUpdate(ValueAnimator animation) {
+				float val = (Float) animation.getAnimatedValue();
+				mBlurTextView.setAlpha(val);
+				mBlurTextView.setScaleX(1.2f - 0.2f * val);
+				mBlurTextView.setScaleY(1.2f - 0.2f * val);
+			}
+		});
+		
+		ObjectAnimator blurAnim = ObjectAnimator.ofFloat(mBlurView,
+				"alpha", 0f, 0.8f).setDuration(2000);
+		blurAnim.addListener(new AnimatorListenerAdapter() {
 			@Override
 			public void onAnimationEnd(Animator animation) {
+				startActivity();
+			}
+		});
+		blurAnim.start();
+	}
+	
+	private void startActivity(){
+		new Handler().postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
 				startActivity(new Intent(mActivity, MainActivity.class));
 				mActivity.finish();
 			}
-		});
-		blurAnimator.start();
+		}, 1000);
 	}
 
 	/**

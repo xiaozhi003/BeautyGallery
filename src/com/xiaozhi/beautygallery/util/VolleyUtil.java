@@ -35,12 +35,13 @@ public class VolleyUtil {
 	public static final int PAGE_SIZE = 14;
 	public static final String PREF_SEARCH_QUERY = "searchQuery";
 	public static final String PREF_LAST_RESULT_ID = "lastResultId";
+	public static final String TAG2_DEFAULT = "性感美女";
 
 	private static final String ENDPOINT = "http://image.baidu.com/channel/listjson";
 	private static final String PN = "pn";
 	private static final String RN = "rn";
 	private static final String TAG1 = "tag1";
-	private static final String TAG2 = "tag2";
+	public static final String TAG2 = "tag2";
 	
 	private String url = "";
 	

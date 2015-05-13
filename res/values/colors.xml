@@ -2,4 +2,5 @@
 <resources>
     <color name="title_bar_bg">#222222</color>
     <color name="rippelColor">#FFFFFF</color>
+    <color name="pop_win_bg">#bb303030</color>
 </resources>
