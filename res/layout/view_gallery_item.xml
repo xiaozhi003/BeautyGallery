@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/imageView"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/image_height"
-    android:contentDescription="@string/app_name"
-    android:layout_marginTop="@dimen/image_padding"
-    android:scaleType="centerCrop" />
+<com.xiaozhi.beautygallery.view.RippleView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rect"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    ripple:rv_alpha="50"
+    ripple:rv_rippleDuration="100"
+    ripple:rv_type="rectangle"
+    ripple:rv_zoom="true"
+    ripple:rv_zoomDuration="200" >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_height"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop" />
+
+</com.xiaozhi.beautygallery.view.RippleView>
