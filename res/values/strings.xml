@@ -3,5 +3,27 @@
 
     <string name="app_name">美女图</string>
     <string name="action_settings">设置</string>
+    
+    <string-array name="beauty_array">
+        <item>性感</item>
+        <item>柔美</item>
+        <item>欧美</item>
+        <item>甜素纯</item>
+        <item>素颜</item>
+        <item>非主流</item>
+        <item>唯美</item>
+        <item>可爱</item>
+        <item>写真</item>
+        <item>清纯</item>
+        <item>气质</item>
+        <item>知性</item>
+        <item>校花</item>
+        <item>诱惑</item>
+        <item>小清新</item>
+        <item>嫩萝莉</item>
+        <item>粉嫩</item>
+        <item>萝莉</item>
+        <item>时尚</item>
+    </string-array>
 
 </resources>

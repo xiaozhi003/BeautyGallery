@@ -1,7 +1,7 @@
 package com.xiaozhi.beautygallery.activity;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.Menu;
@@ -11,11 +11,13 @@ import android.view.View;
 import com.xiaozhi.beautygallery.R;
 import com.xiaozhi.beautygallery.fragment.FragmentMain;
 import com.xiaozhi.beautygallery.view.MorePopWindow;
+import com.xiaozhi.beautygallery.view.MorePopWindow.OnMorePopWindowItemClickListener;
 
 public class MainActivity extends SingleFragmentActivity {
 
 	private Toolbar mToolbar;
 	private MorePopWindow mMorePopWindow;
+	private Fragment mFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,15 @@ public class MainActivity extends SingleFragmentActivity {
 		mToolbar.setVisibility(View.VISIBLE);
 		setSupportActionBar(mToolbar);
 		mMorePopWindow = new MorePopWindow(this);
+		mMorePopWindow.setOnMorePopWindowItemClickListener(new OnMorePopWindowItemClickListener() {
+			
+			@Override
+			public void onItemClick(int position, String item) {
+				if (mFragment instanceof FragmentMain) {
+					((FragmentMain) mFragment).changeOtherBeautyType(item);
+				}
+			}
+		});
 		mToolbar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
 			@Override
@@ -71,7 +82,7 @@ public class MainActivity extends SingleFragmentActivity {
 
 	@Override
 	protected Fragment createFragment() {
-		// TODO Auto-generated method stub
-		return new FragmentMain();
+		mFragment = new FragmentMain();
+		return mFragment;
 	}
 }

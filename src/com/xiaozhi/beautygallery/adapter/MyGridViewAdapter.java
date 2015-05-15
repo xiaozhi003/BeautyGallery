@@ -22,9 +22,8 @@ import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.xiaozhi.beautygallery.R;
-import com.xiaozhi.beautygallery.activity.BeautyActivity;
+import com.xiaozhi.beautygallery.activity.BeautyPagerActivity;
 import com.xiaozhi.beautygallery.domain.Image;
-import com.xiaozhi.beautygallery.fragment.BeautyFragment;
 import com.xiaozhi.beautygallery.util.ImageLoaderUtil;
 import com.xiaozhi.beautygallery.util.Logs;
 import com.xiaozhi.beautygallery.util.MeasureUtil;
@@ -121,6 +120,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 				// 2loadImage
 				holder.mImageView.setTag(R.id.imageView, getItem(position)
 						.getUrl());
+				holder.mImageView.setTag(R.id.gridView, position);
 				loadImage(holder.mImageView, position);
 			}
 		} else if (getItemViewType(position) == VIEW_TYPE_FOOT && position != 0) {
@@ -136,7 +136,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 	 * @param parent
 	 * @return
 	 */
-	private View initConvertView(int position, View convertView,
+	private View initConvertView(final int position, View convertView,
 			ViewGroup parent) {
 		ViewHolder holder = null;
 		if (getItemViewType(position) == VIEW_TYPE_FOOT) {// 初始化底部加载更多视图
@@ -174,9 +174,8 @@ public class MyGridViewAdapter extends BaseAdapter {
 						
 						@Override
 						public void run() {
-							Intent intent = new Intent(mContext, BeautyActivity.class);
-							intent.putExtra(BeautyFragment.URL, v
-									.getTag(R.id.imageView).toString());
+							Intent intent = new Intent(mContext, BeautyPagerActivity.class);
+							intent.putExtra(BeautyPagerActivity.POSITION, (Integer)v.getTag(R.id.gridView));
 							mContext.startActivity(intent);
 						}
 					}, 200);
@@ -210,7 +209,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 	private void loadImage(final ImageView imageView, final int position) {
 		Animation animation = AnimationUtils.loadAnimation(mContext,
 				R.anim.anim_alpha);
-		imageView.setAnimation(animation);
+		imageView.startAnimation(animation);
 		Logs.i("width:" + imageView.getWidth() + ";height:"
 				+ imageView.getHeight());
 		ImageLoaderUtil.loadImage(getItem(position).getUrl(), new ImageSize(
@@ -243,6 +242,9 @@ public class MyGridViewAdapter extends BaseAdapter {
 		ImageView mImageView;
 	}
 
+	/**
+	 * 下拉加载回调接口
+	 */
 	public interface LoadListener {
 		void onLoad();
 	}

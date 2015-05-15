@@ -23,6 +23,7 @@
         android:layout_marginTop="96dp"
         android:alpha="0"
         android:gravity="center"
+        android:textColor="#55000000"
         android:text="美 女 图"
         android:textSize="36sp"
         android:textStyle="bold" />

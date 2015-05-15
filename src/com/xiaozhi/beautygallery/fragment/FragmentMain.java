@@ -10,8 +10,8 @@ import java.util.List;
 
 import org.json.JSONObject;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,14 +36,13 @@ import com.xiaozhi.beautygallery.view.FooterView;
 public class FragmentMain extends Fragment {
 	
 	private static final String TAG = "FragmentMain";
-	final String[] mStringList = {"Alibaba", "TMALL 11-11"};
 	private int pn;// 加载的图片数量
 	private String tag2;
-	private String mOldTag2;
+	private String oldTag2;
 	
 	private GridView mGridView;
 	private MyGridViewAdapter mAdapter;
-	private List<Image> mListImages = new ArrayList<Image>();
+	public static List<Image> mListImages = new ArrayList<Image>();
 	private View view;
     private PtrFrameLayout mFrame;
 	
@@ -62,6 +61,7 @@ public class FragmentMain extends Fragment {
 			tag2 = VolleyUtil.TAG2_DEFAULT;
 			CustomUtil.getInstance().save(VolleyUtil.TAG2, tag2);
 		}
+		oldTag2 = tag2;
 		mGridView = (GridView) view.findViewById(R.id.gridView);
 		mAdapter = new MyGridViewAdapter(getActivity(), mListImages);
 		mAdapter.setLoadListener(new LoadListener() {
@@ -96,7 +96,11 @@ public class FragmentMain extends Fragment {
             public void onRefreshBegin(PtrFrameLayout frame) {
             	mListImages.clear();
             	pn = 0;
-                loadItems();
+            	if (!oldTag2.equals(tag2)) {
+            		CustomUtil.getInstance().save(VolleyUtil.TAG2, tag2);
+            		oldTag2 = tag2;
+				}
+            	loadItems();
             }
         });
 	}
@@ -119,6 +123,7 @@ public class FragmentMain extends Fragment {
 			@Override
 			public void onErrorResponse(VolleyError arg0) {
 				Toast.makeText(getActivity(), "加载失败", Toast.LENGTH_SHORT).show();
+				mFrame.refreshComplete();
 			}
 		});
 		VolleyUtil.getInstance().addToRequestQueue(request);
@@ -137,5 +142,10 @@ public class FragmentMain extends Fragment {
 	
 	private void updateAdapter(){
 		mAdapter.notifyDataSetChanged();
+	}
+	
+	public void changeOtherBeautyType(String tag2){
+		this.tag2 = tag2;
+		mFrame.autoRefresh();
 	}
 }

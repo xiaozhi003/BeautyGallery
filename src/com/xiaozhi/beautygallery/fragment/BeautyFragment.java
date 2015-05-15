@@ -1,17 +1,16 @@
 package com.xiaozhi.beautygallery.fragment;
 
-import com.nostra13.universalimageloader.core.imageaware.ImageAware;
-import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
-import com.xiaozhi.beautygallery.R;
-import com.xiaozhi.beautygallery.util.ImageLoaderUtil;
-
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import com.nostra13.universalimageloader.core.imageaware.ImageAware;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
+import com.xiaozhi.beautygallery.R;
+import com.xiaozhi.beautygallery.util.ImageLoaderUtil;
 
 public class BeautyFragment extends Fragment {
 
@@ -37,7 +36,6 @@ public class BeautyFragment extends Fragment {
 		Bundle bundle = getArguments();
 		if (bundle != null)
 			url = bundle.getString(URL);
-		Toast.makeText(getActivity(), "url:" + url, Toast.LENGTH_SHORT).show();
 	}
 
 	public static BeautyFragment newInstance(String url) {

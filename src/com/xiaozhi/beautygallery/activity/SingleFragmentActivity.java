@@ -2,11 +2,9 @@ package com.xiaozhi.beautygallery.activity;
 
 import com.xiaozhi.beautygallery.R;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 /**
  * 抽象Activity类
@@ -23,7 +21,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 
 		// 获取FragmentManager对象
-		FragmentManager fm = getFragmentManager();
+		FragmentManager fm = getSupportFragmentManager();
 		// 获取fragment
 		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 

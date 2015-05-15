@@ -32,7 +32,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.BeautyActivity"
+            android:name=".activity.BeautyPagerActivity"
             android:screenOrientation="portrait" >
         </activity>
     </application>
