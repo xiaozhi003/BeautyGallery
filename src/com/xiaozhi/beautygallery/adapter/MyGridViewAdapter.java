@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -90,6 +91,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		Log.i("Myadapter", "position:" + position);
 		if (convertView == null) {
 			convertView = initConvertView(position, convertView, parent);
 		}
@@ -171,11 +173,13 @@ public class MyGridViewAdapter extends BaseAdapter {
 				@Override
 				public void onClick(final View v) {
 					new Handler().postDelayed(new Runnable() {
-						
+
 						@Override
 						public void run() {
-							Intent intent = new Intent(mContext, BeautyPagerActivity.class);
-							intent.putExtra(BeautyPagerActivity.POSITION, (Integer)v.getTag(R.id.gridView));
+							Intent intent = new Intent(mContext,
+									BeautyPagerActivity.class);
+							intent.putExtra(BeautyPagerActivity.POSITION,
+									(Integer) v.getTag(R.id.gridView));
 							mContext.startActivity(intent);
 						}
 					}, 200);
@@ -218,7 +222,8 @@ public class MyGridViewAdapter extends BaseAdapter {
 			@Override
 			public void onLoadingComplete(String imageUri, View view,
 					Bitmap loadedImage) {
-				Logs.d("onLoadingComplete...");
+				Log.d("MyGrid:","onLoadingComplete..." + position);
+				Log.d("MyGrid:",imageUri.equals(imageView.getTag(R.id.imageView)) + "");
 				/**
 				 * 如下判断就是处理图片在快速滑动异步线程不断执行setImageBitmap
 				 * 通过比较当前的url是否过期，来给imageView设置一次也就是最新的Bitmap
