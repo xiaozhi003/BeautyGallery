@@ -31,7 +31,7 @@ import com.xiaozhi.beautygallery.domain.Image;
  * 网络访问工具类
  */
 public class VolleyUtil {
-	
+
 	public static final int PAGE_SIZE = 14;
 	public static final String PREF_SEARCH_QUERY = "searchQuery";
 	public static final String PREF_LAST_RESULT_ID = "lastResultId";
@@ -42,9 +42,9 @@ public class VolleyUtil {
 	private static final String RN = "rn";
 	private static final String TAG1 = "tag1";
 	public static final String TAG2 = "tag2";
-	
+
 	private String url = "";
-	
+
 	private static VolleyUtil mInstance;
 	private RequestQueue mRequestQueue;
 	private ImageLoader mImageLoader;
@@ -54,8 +54,7 @@ public class VolleyUtil {
 		mCtx = context;
 		mRequestQueue = getRequestQueue();
 
-		mImageLoader = new ImageLoader(mRequestQueue,
-				new BitmapCache());
+		mImageLoader = new ImageLoader(mRequestQueue, new BitmapCache());
 	}
 
 	public static void init(Context context) {
@@ -89,14 +88,14 @@ public class VolleyUtil {
 	public ImageLoader getImageLoader() {
 		return mImageLoader;
 	}
-	
-	private class BitmapCache implements ImageCache{
-		
+
+	private class BitmapCache implements ImageCache {
+
 		private int maxSize = 8 * 1024 * 1024;
 		private LruCache<String, Bitmap> cache;
-		
-		public BitmapCache(){
-			cache = new LruCache<String, Bitmap>(maxSize){
+
+		public BitmapCache() {
+			cache = new LruCache<String, Bitmap>(maxSize) {
 				@Override
 				protected int sizeOf(String key, Bitmap value) {
 					return value.getByteCount();
@@ -114,18 +113,17 @@ public class VolleyUtil {
 			cache.put(url, bitmap);
 		}
 	}
-	
-	public String getUrl(int pn,String tag2){
+
+	public String getUrl(int pn, String tag2) {
 		url = Uri.parse(ENDPOINT).buildUpon()
 				.appendQueryParameter(PN, String.valueOf(pn))
-				.appendQueryParameter(RN, PAGE_SIZE+"")
+				.appendQueryParameter(RN, PAGE_SIZE + "")
 				.appendQueryParameter(TAG1, "美女")
 				.appendQueryParameter(TAG2, tag2).build().toString();
 		Logs.d("url:" + url);
 		return url;
 	}
-	
-	
+
 	/**
 	 * 解析json数据
 	 * 

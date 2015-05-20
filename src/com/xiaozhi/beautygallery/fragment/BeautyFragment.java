@@ -17,7 +17,7 @@ public class BeautyFragment extends Fragment {
 	public static final String URL = "url";
 
 	private String url;
-	
+
 	private ImageView mBeautyImg;
 
 	@Override
@@ -26,7 +26,8 @@ public class BeautyFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_beauty, container, false);
 		mBeautyImg = (ImageView) v.findViewById(R.id.beautyImg);
 		ImageAware imageAware = new ImageViewAware(mBeautyImg, false);
-		ImageLoaderUtil.displayImage(url, imageAware,ImageLoaderUtil.getDefaultOptions());
+		ImageLoaderUtil.displayImage(url, imageAware,
+				ImageLoaderUtil.getDefaultOptions());
 		return v;
 	}
 

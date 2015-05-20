@@ -30,15 +30,17 @@ public class MainActivity extends SingleFragmentActivity {
 		mToolbar.setVisibility(View.VISIBLE);
 		setSupportActionBar(mToolbar);
 		mMorePopWindow = new MorePopWindow(this);
-		mMorePopWindow.setOnMorePopWindowItemClickListener(new OnMorePopWindowItemClickListener() {
-			
-			@Override
-			public void onItemClick(int position, String item) {
-				if (mFragment instanceof FragmentMain) {
-					((FragmentMain) mFragment).changeOtherBeautyType(item);
-				}
-			}
-		});
+		mMorePopWindow
+				.setOnMorePopWindowItemClickListener(new OnMorePopWindowItemClickListener() {
+
+					@Override
+					public void onItemClick(int position, String item) {
+						if (mFragment instanceof FragmentMain) {
+							((FragmentMain) mFragment)
+									.changeOtherBeautyType(item);
+						}
+					}
+				});
 		mToolbar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
 			@Override

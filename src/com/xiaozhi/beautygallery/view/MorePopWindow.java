@@ -42,7 +42,8 @@ public class MorePopWindow extends PopupWindow {
 		mMoreView = mInflater.inflate(R.layout.view_more_pop, null);
 		mGridView = (GridView) mMoreView.findViewById(R.id.popGridView);
 		initStrings();
-		mAdapter = new ArrayAdapter<String>(mContext, R.layout.view_more_pop_item, mBeautyTypes);
+		mAdapter = new ArrayAdapter<String>(mContext,
+				R.layout.view_more_pop_item, mBeautyTypes);
 		mGridView.setAdapter(mAdapter);
 		mGridView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -50,9 +51,11 @@ public class MorePopWindow extends PopupWindow {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				if (mOnMorePopWindowItemClickListener != null) {
-					mOnMorePopWindowItemClickListener.onItemClick(position, mBeautyTypes[position]);
+					mOnMorePopWindowItemClickListener.onItemClick(position,
+							mBeautyTypes[position]);
 				}
-				parent.getChildAt(mCurrentPosition).setBackgroundColor(Color.TRANSPARENT);
+				parent.getChildAt(mCurrentPosition).setBackgroundColor(
+						Color.TRANSPARENT);
 				view.setBackgroundResource(R.drawable.shape_more_pop);
 				mCurrentPosition = position;
 				mPopupWindow.dismiss();
@@ -69,7 +72,7 @@ public class MorePopWindow extends PopupWindow {
 		// 设置SelectPicPopupWindow弹出窗体可点击
 		this.setFocusable(true);
 		// 设置SelectPicPopupWindow弹出窗体动画效果
-		//		this.setAnimationStyle(R.style.popwin_anim_style);
+		// this.setAnimationStyle(R.style.popwin_anim_style);
 		// 实例化一个ColorDrawable颜色为半透明
 		ColorDrawable dw = new ColorDrawable(0x00000000);
 		// 设置SelectPicPopupWindow弹出窗体的背景
@@ -77,7 +80,8 @@ public class MorePopWindow extends PopupWindow {
 	}
 
 	private void initStrings() {
-		mBeautyTypes = mContext.getResources().getStringArray(R.array.beauty_array);
+		mBeautyTypes = mContext.getResources().getStringArray(
+				R.array.beauty_array);
 		mList = new ArrayList<String>();
 		for (int i = 0; i < 20; i++) {
 			mList.add("item" + i);
@@ -120,12 +124,12 @@ public class MorePopWindow extends PopupWindow {
 		});
 	}
 
-	private void cancel(){
+	private void cancel() {
 		super.dismiss();
 	}
 
-	public interface OnMorePopWindowItemClickListener{
-		public void onItemClick(int position,String item);
+	public interface OnMorePopWindowItemClickListener {
+		public void onItemClick(int position, String item);
 	}
 
 	private OnMorePopWindowItemClickListener mOnMorePopWindowItemClickListener;

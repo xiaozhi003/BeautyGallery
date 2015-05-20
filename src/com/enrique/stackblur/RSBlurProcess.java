@@ -9,8 +9,7 @@ import android.support.v8.renderscript.RenderScript;
 import com.xiaozhi.beautygallery.R;
 
 /**
- * @see JavaBlurProcess
- * Blur using renderscript.
+ * @see JavaBlurProcess Blur using renderscript.
  */
 class RSBlurProcess implements BlurProcess {
 	private final Context context;
@@ -27,9 +26,11 @@ class RSBlurProcess implements BlurProcess {
 		int height = original.getHeight();
 		Bitmap blurred = original.copy(Bitmap.Config.ARGB_8888, true);
 
-		ScriptC_blur blurScript = new ScriptC_blur(_rs, context.getResources(), R.raw.blur);
+		ScriptC_blur blurScript = new ScriptC_blur(_rs, context.getResources(),
+				R.raw.blur);
 
-		Allocation inAllocation = Allocation.createFromBitmap(_rs, blurred, Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
+		Allocation inAllocation = Allocation.createFromBitmap(_rs, blurred,
+				Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
 
 		blurScript.set_gIn(inAllocation);
 		blurScript.set_width(width);
@@ -41,7 +42,8 @@ class RSBlurProcess implements BlurProcess {
 			row_indices[i] = i;
 		}
 
-		Allocation rows = Allocation.createSized(_rs, Element.U32(_rs), height, Allocation.USAGE_SCRIPT);
+		Allocation rows = Allocation.createSized(_rs, Element.U32(_rs), height,
+				Allocation.USAGE_SCRIPT);
 		rows.copyFrom(row_indices);
 
 		row_indices = new int[width];
@@ -49,7 +51,8 @@ class RSBlurProcess implements BlurProcess {
 			row_indices[i] = i;
 		}
 
-		Allocation columns = Allocation.createSized(_rs, Element.U32(_rs), width, Allocation.USAGE_SCRIPT);
+		Allocation columns = Allocation.createSized(_rs, Element.U32(_rs),
+				width, Allocation.USAGE_SCRIPT);
 		columns.copyFrom(row_indices);
 
 		blurScript.forEach_blur_h(rows);

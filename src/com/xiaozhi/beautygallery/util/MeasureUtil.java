@@ -7,7 +7,7 @@ import android.util.Log;
 public class MeasureUtil {
 
 	private static final String TAG = "MeasureUtil";
-	
+
 	public static int[] getScreenSize(Context activity) {
 		// 获取屏幕密度（方法2）
 		DisplayMetrics dm = new DisplayMetrics();

@@ -19,8 +19,6 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.assist.ImageSize;
-import com.nostra13.universalimageloader.core.imageaware.ImageAware;
-import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.xiaozhi.beautygallery.R;
 import com.xiaozhi.beautygallery.activity.BeautyPagerActivity;
@@ -37,10 +35,11 @@ import com.xiaozhi.beautygallery.view.FooterView;
  */
 public class MyGridViewAdapter extends BaseAdapter {
 
-	// 图片视图类型
+	/** 图片视图类型 */
 	public static final int VIEW_TYPE_ITEM = 0;
-	// 底部图片类型
+	/** 底部图片类型 */
 	public static final int VIEW_TYPE_FOOT = 1;
+	/** 视图数量 */
 	public static final int VIEW_TYPE_COUNT = 2;
 
 	private List<Image> mListImages;
@@ -98,7 +97,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 		}
 
 		setDataToConvertView(position, convertView);
-		
+
 		return convertView;
 	}
 
@@ -121,9 +120,9 @@ public class MyGridViewAdapter extends BaseAdapter {
 				holder.mImageView.setTag(R.id.imageView, getItem(position)
 						.getUrl());
 				holder.mImageView.setTag(R.id.gridView, position);
-				
+
 				// 1displayImage 两种方式的比较
-//				 displayImage(holder.mImageView, position);
+				// displayImage(holder.mImageView, position);
 				// 2loadImage
 				loadImage(holder.mImageView, position);
 			}
@@ -200,7 +199,8 @@ public class MyGridViewAdapter extends BaseAdapter {
 	 * @param position
 	 */
 	private void displayImage(ImageView imageView, int position) {
-		ImageLoaderUtil.displayImage(getItem(position).getUrl(), imageView,ImageLoaderUtil.getDefaultOptions());
+		ImageLoaderUtil.displayImage(getItem(position).getUrl(), imageView,
+				ImageLoaderUtil.getDefaultOptions());
 	}
 
 	/**
@@ -226,7 +226,6 @@ public class MyGridViewAdapter extends BaseAdapter {
 				 * 通过比较当前的url是否过期，来给imageView设置一次也就是最新的Bitmap
 				 * 这样就避免了多次重复的setImageBitmap，而且加了渐变动画体验就会更好了
 				 */
-				
 				if (imageUri.equals(imageView.getTag(R.id.imageView))) {
 					imageView.setImageBitmap(loadedImage);
 				}

@@ -16,6 +16,7 @@ import com.xiaozhi.beautygallery.R;
 
 /**
  * 图片加载工具类
+ * 
  * @author Xiaozhi
  */
 public class ImageLoaderUtil {
@@ -26,7 +27,6 @@ public class ImageLoaderUtil {
 	private static ImageLoader mImageLoader;
 
 	private static ImageLoaderConfiguration configuration;
-
 
 	private ImageLoaderUtil() {
 	}
@@ -42,9 +42,9 @@ public class ImageLoaderUtil {
 		ImageLoader.getInstance().init(configuration);
 		mImageLoader = ImageLoader.getInstance();
 	}
-	
+
 	public static void displayImage(String uri, ImageView imageView,
-			DisplayImageOptions options){
+			DisplayImageOptions options) {
 		mImageLoader.displayImage(uri, imageView, options);
 	}
 
@@ -75,11 +75,10 @@ public class ImageLoaderUtil {
 		mImageLoader.displayImage(uri, imageAware, options);
 	}
 
-
 	public static DisplayImageOptions getDefaultOptions() {
 		DisplayImageOptions options;
 		options = new DisplayImageOptions.Builder()
-//				.showImageOnLoading(R.drawable.empty_photo) // 设置图片在下载期间显示的图片
+		// .showImageOnLoading(R.drawable.empty_photo) // 设置图片在下载期间显示的图片
 				.showImageForEmptyUri(R.drawable.empty_photo)// 设置图片Uri为空或是错误的时候显示的图片
 				.showImageOnFail(R.drawable.empty_photo) // 设置图片加载/解码过程中错误时候显示的图片
 				.cacheInMemory(true)// 设置下载的图片是否缓存在内存中

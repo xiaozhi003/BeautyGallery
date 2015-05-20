@@ -73,7 +73,7 @@ public class WelcomeActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		new Handler().postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				startAnimation();
@@ -91,7 +91,7 @@ public class WelcomeActivity extends Activity {
 		ObjectAnimator imageAnimator1 = ObjectAnimator.ofFloat(mWelcomeImg,
 				"scaleY", 1.0f, 1.1f);
 		AnimatorSet set = new AnimatorSet();
-		set.playTogether(imageAnimator,imageAnimator1);
+		set.playTogether(imageAnimator, imageAnimator1);
 		set.setDuration(2000);
 		set.addListener(new AnimatorListenerAdapter() {
 
@@ -105,12 +105,13 @@ public class WelcomeActivity extends Activity {
 		mBlurView.setScaleX(1.1f);
 		mBlurView.setScaleY(1.1f);
 	}
-	
-	private void blurAnimation(){
-		ObjectAnimator textAnim = ObjectAnimator.ofFloat(mBlurTextView, "text", 0.0f,1.f).setDuration(2000);
+
+	private void blurAnimation() {
+		ObjectAnimator textAnim = ObjectAnimator.ofFloat(mBlurTextView, "text",
+				0.0f, 1.f).setDuration(2000);
 		textAnim.start();
 		textAnim.addUpdateListener(new AnimatorUpdateListener() {
-			
+
 			@Override
 			public void onAnimationUpdate(ValueAnimator animation) {
 				float val = (Float) animation.getAnimatedValue();
@@ -119,9 +120,9 @@ public class WelcomeActivity extends Activity {
 				mBlurTextView.setScaleY(1.2f - 0.2f * val);
 			}
 		});
-		
-		ObjectAnimator blurAnim = ObjectAnimator.ofFloat(mBlurView,
-				"alpha", 0f, 0.8f).setDuration(2000);
+
+		ObjectAnimator blurAnim = ObjectAnimator.ofFloat(mBlurView, "alpha",
+				0f, 0.8f).setDuration(2000);
 		blurAnim.addListener(new AnimatorListenerAdapter() {
 			@Override
 			public void onAnimationEnd(Animator animation) {
@@ -130,10 +131,10 @@ public class WelcomeActivity extends Activity {
 		});
 		blurAnim.start();
 	}
-	
-	private void startActivity(){
+
+	private void startActivity() {
 		new Handler().postDelayed(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				startActivity(new Intent(mActivity, MainActivity.class));

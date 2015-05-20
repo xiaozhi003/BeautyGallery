@@ -23,7 +23,6 @@
  * @license: Apache License 2.0
  */
 
-
 package com.enrique.stackblur;
 
 import java.io.FileOutputStream;
@@ -38,8 +37,10 @@ import android.util.Log;
 import com.xiaozhi.beautygallery.BuildConfig;
 
 public class StackBlurManager {
-	static final int EXECUTOR_THREADS = Runtime.getRuntime().availableProcessors();
-	static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(EXECUTOR_THREADS);
+	static final int EXECUTOR_THREADS = Runtime.getRuntime()
+			.availableProcessors();
+	static final ExecutorService EXECUTOR = Executors
+			.newFixedThreadPool(EXECUTOR_THREADS);
 
 	private static volatile boolean hasRS = true;
 
@@ -59,8 +60,11 @@ public class StackBlurManager {
 	private final BlurProcess _blurProcess;
 
 	/**
-	 * Constructor method (basic initialization and construction of the pixel array)
-	 * @param image The image that will be analyed
+	 * Constructor method (basic initialization and construction of the pixel
+	 * array)
+	 * 
+	 * @param image
+	 *            The image that will be analyed
 	 */
 	public StackBlurManager(Bitmap image) {
 		_image = image;
@@ -69,6 +73,7 @@ public class StackBlurManager {
 
 	/**
 	 * Process the image on the given radius. Radius must be at least 1
+	 * 
 	 * @param radius
 	 */
 	public Bitmap process(int radius) {
@@ -78,6 +83,7 @@ public class StackBlurManager {
 
 	/**
 	 * Returns the blurred image as a bitmap
+	 * 
 	 * @return blurred image
 	 */
 	public Bitmap returnBlurredImage() {
@@ -86,7 +92,9 @@ public class StackBlurManager {
 
 	/**
 	 * Save the image into the file system
-	 * @param path The path where to save the image
+	 * 
+	 * @param path
+	 *            The path where to save the image
 	 */
 	public void saveIntoFile(String path) {
 		try {
@@ -99,6 +107,7 @@ public class StackBlurManager {
 
 	/**
 	 * Returns the original image as a bitmap
+	 * 
 	 * @return the original bitmap image
 	 */
 	public Bitmap getImage() {
@@ -115,9 +124,11 @@ public class StackBlurManager {
 	}
 
 	/**
-	 * Process the image using renderscript if possible
-	 * Fall back to native if renderscript is not available
-	 * @param context renderscript requires an android context
+	 * Process the image using renderscript if possible Fall back to native if
+	 * renderscript is not available
+	 * 
+	 * @param context
+	 *            renderscript requires an android context
 	 * @param radius
 	 */
 	public Bitmap processRenderScript(Context context, float radius) {
@@ -125,18 +136,17 @@ public class StackBlurManager {
 		// The renderscript support library doesn't have .so files for ARMv6.
 		// Remember if there is an error creating the renderscript context,
 		// and fall back to NativeBlurProcess
-		if(hasRS) {
+		if (hasRS) {
 			try {
 				blurProcess = new RSBlurProcess(context);
 			} catch (RSRuntimeException e) {
-				if(BuildConfig.DEBUG) {
+				if (BuildConfig.DEBUG) {
 					Log.i("StackBlurManager", "Falling back to Native Blur", e);
 				}
 				blurProcess = new NativeBlurProcess();
 				hasRS = false;
 			}
-		}
-		else {
+		} else {
 			blurProcess = new NativeBlurProcess();
 		}
 		_result = blurProcess.blur(_image, radius);

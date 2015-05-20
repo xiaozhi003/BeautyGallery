@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.concurrent.Callable;
 
 /**
- * @see JavaBlurProcess
- * Blur using the NDK and native code.
+ * @see JavaBlurProcess Blur using the NDK and native code.
  */
 class NativeBlurProcess implements BlurProcess {
-	private static native void functionToBlur(Bitmap bitmapOut, int radius, int threadCount, int threadIndex, int round);
+	private static native void functionToBlur(Bitmap bitmapOut, int radius,
+			int threadCount, int threadIndex, int round);
 
 	static {
 		System.loadLibrary("blur");
@@ -25,7 +25,8 @@ class NativeBlurProcess implements BlurProcess {
 		ArrayList<NativeTask> horizontal = new ArrayList<NativeTask>(cores);
 		ArrayList<NativeTask> vertical = new ArrayList<NativeTask>(cores);
 		for (int i = 0; i < cores; i++) {
-			horizontal.add(new NativeTask(bitmapOut, (int) radius, cores, i, 1));
+			horizontal
+					.add(new NativeTask(bitmapOut, (int) radius, cores, i, 1));
 			vertical.add(new NativeTask(bitmapOut, (int) radius, cores, i, 2));
 		}
 
@@ -50,7 +51,8 @@ class NativeBlurProcess implements BlurProcess {
 		private final int _coreIndex;
 		private final int _round;
 
-		public NativeTask(Bitmap bitmapOut, int radius, int totalCores, int coreIndex, int round) {
+		public NativeTask(Bitmap bitmapOut, int radius, int totalCores,
+				int coreIndex, int round) {
 			_bitmapOut = bitmapOut;
 			_radius = radius;
 			_totalCores = totalCores;
@@ -58,7 +60,8 @@ class NativeBlurProcess implements BlurProcess {
 			_round = round;
 		}
 
-		@Override public Void call() throws Exception {
+		@Override
+		public Void call() throws Exception {
 			functionToBlur(_bitmapOut, _radius, _totalCores, _coreIndex, _round);
 			return null;
 		}

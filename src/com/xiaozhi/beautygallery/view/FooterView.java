@@ -9,44 +9,46 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 /**
  * 加载更多底部视图
+ * 
  * @author asus
  *
  */
 public class FooterView extends LinearLayout {
-	
+
 	private Context mContext;
-	
+
 	public static final int HIDE = 0;
 	public static final int MORE = 1;
 	public static final int LOADING = 2;
 	public static final int BADENTWORK = 3;
-	
+
 	private ProgressBar mProgressBar;
 	private TextView mTextView;
 	private Button mButton;
-	
+
 	private int curStatus;
-	
+
 	public FooterView(Context context) {
 		super(context);
 		mContext = context;
 		init();
 	}
-	
+
 	// 初始化FooterView
-	private void init(){
+	private void init() {
 		LayoutInflater.from(mContext).inflate(R.layout.view_footer, this, true);
 		mProgressBar = (ProgressBar) findViewById(R.id.footer_loading);
 		mTextView = (TextView) findViewById(R.id.footview_text);
 		mButton = (Button) findViewById(R.id.footview_button);
 		setStatus(MORE);
 	}
-	
-	public void setStatus(int status){
+
+	public void setStatus(int status) {
 		curStatus = status;
-		switch(status){
+		switch (status) {
 		case HIDE:
 			setVisibility(View.GONE);
 			break;
@@ -73,8 +75,8 @@ public class FooterView extends LinearLayout {
 			break;
 		}
 	}
-	
-	public int getStatus(){
+
+	public int getStatus() {
 		return curStatus;
 	}
 

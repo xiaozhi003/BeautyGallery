@@ -14,9 +14,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 public class BeautyPagerActivity extends AppCompatActivity {
-	
+
 	public static final String POSITION = "position";
-	
+
 	private ViewPager mViewPager;
 	private List<Image> mImages;
 
@@ -24,23 +24,25 @@ public class BeautyPagerActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_beauty_pager);
-		
+
 		initViews();
 	}
 
 	private void initViews() {
 		mImages = FragmentMain.mListImages;
 		mViewPager = (ViewPager) findViewById(R.id.viewPager);
-		mViewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
-			
+		mViewPager.setAdapter(new FragmentStatePagerAdapter(
+				getSupportFragmentManager()) {
+
 			@Override
 			public int getCount() {
 				return mImages.size();
 			}
-			
+
 			@Override
 			public Fragment getItem(int position) {
-				return BeautyFragment.newInstance(mImages.get(position).getUrl());
+				return BeautyFragment.newInstance(mImages.get(position)
+						.getUrl());
 			}
 		});
 		int positon = getIntent().getIntExtra(POSITION, 0);
