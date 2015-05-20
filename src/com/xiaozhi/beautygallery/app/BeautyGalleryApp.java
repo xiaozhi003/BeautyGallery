@@ -32,7 +32,7 @@ public class BeautyGalleryApp extends Application{
 	public void onCreate() {
 		super.onCreate();
 		Logs.setsApplicationTag(BeautyGalleryApp.class.getSimpleName().toString());
-		Logs.setsIsLogEnabled(false);
+		Logs.setsIsLogEnabled(true);
 		// 初始化Volley
 		initVolley();
 		// 初始化Universal-ImageLoader
@@ -72,7 +72,7 @@ public class BeautyGalleryApp extends Application{
 		.defaultDisplayImageOptions(DisplayImageOptions.createSimple())
 		.imageDownloader(
 				new BaseImageDownloader(getApplicationContext(),
-						5 * 1000, 30 * 1000))/*.writeDebugLogs()*/
+						5 * 1000, 30 * 1000))//.writeDebugLogs()
 						.build();// 开始构建
 		ImageLoaderUtil.setConfiguration(configuration);
 		ImageLoaderUtil.getInstance().init(getApplicationContext());

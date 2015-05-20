@@ -92,12 +92,13 @@ public class MyGridViewAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Log.i("Myadapter", "position:" + position);
+		Log.i("Myadapter", "getChildCount:" + parent.getChildCount());
 		if (convertView == null) {
 			convertView = initConvertView(position, convertView, parent);
 		}
 
 		setDataToConvertView(position, convertView);
-
+		
 		return convertView;
 	}
 
@@ -117,7 +118,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 			if (!getItem(position).getUrl().equals(
 					holder.mImageView.getTag(R.id.imageView))) {
 				// 1displayImage 两种方式的比较
-				// displayImage(holderF.mImageView, position);
+//				 displayImage(holder.mImageView, position);
 
 				// 2loadImage
 				holder.mImageView.setTag(R.id.imageView, getItem(position)
@@ -198,10 +199,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 	 * @param position
 	 */
 	private void displayImage(ImageView imageView, int position) {
-		ImageAware imageAware = new ImageViewAware(imageView, false);
-
-		ImageLoaderUtil.displayImage(getItem(position).getUrl(), imageAware,
-				ImageLoaderUtil.getDefaultOptions());
+		ImageLoaderUtil.displayImage(getItem(position).getUrl(), imageView,ImageLoaderUtil.getDefaultOptions());
 	}
 
 	/**
@@ -222,13 +220,12 @@ public class MyGridViewAdapter extends BaseAdapter {
 			@Override
 			public void onLoadingComplete(String imageUri, View view,
 					Bitmap loadedImage) {
-				Log.d("MyGrid:","onLoadingComplete..." + position);
-				Log.d("MyGrid:",imageUri.equals(imageView.getTag(R.id.imageView)) + "");
 				/**
 				 * 如下判断就是处理图片在快速滑动异步线程不断执行setImageBitmap
 				 * 通过比较当前的url是否过期，来给imageView设置一次也就是最新的Bitmap
 				 * 这样就避免了多次重复的setImageBitmap，而且加了渐变动画体验就会更好了
 				 */
+				
 				if (imageUri.equals(imageView.getTag(R.id.imageView))) {
 					imageView.setImageBitmap(loadedImage);
 				}
@@ -237,7 +234,6 @@ public class MyGridViewAdapter extends BaseAdapter {
 			@Override
 			public void onLoadingStarted(String imageUri, View view) {
 				super.onLoadingStarted(imageUri, view);
-				Logs.i("onLoadingStarted...");
 				imageView.setImageResource(R.drawable.empty_photo);
 			}
 		});

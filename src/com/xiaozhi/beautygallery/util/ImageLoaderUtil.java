@@ -2,6 +2,7 @@ package com.xiaozhi.beautygallery.util;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -21,7 +22,7 @@ public class ImageLoaderUtil {
 
 	private static ImageLoaderUtil loader = new ImageLoaderUtil();
 
-	public static ImageLoader mImageLoader;
+	private static ImageLoader mImageLoader;
 
 	private static ImageLoaderConfiguration configuration;
 
@@ -39,6 +40,11 @@ public class ImageLoaderUtil {
 		}
 		ImageLoader.getInstance().init(configuration);
 		mImageLoader = ImageLoader.getInstance();
+	}
+	
+	public static void displayImage(String uri, ImageView imageView,
+			DisplayImageOptions options){
+		mImageLoader.displayImage(uri, imageView, options);
 	}
 
 	public static void displayImage(String uri, ImageAware imageAware) {
