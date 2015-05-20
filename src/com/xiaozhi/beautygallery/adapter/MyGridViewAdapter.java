@@ -117,13 +117,14 @@ public class MyGridViewAdapter extends BaseAdapter {
 			 */
 			if (!getItem(position).getUrl().equals(
 					holder.mImageView.getTag(R.id.imageView))) {
-				// 1displayImage 两种方式的比较
-//				 displayImage(holder.mImageView, position);
-
-				// 2loadImage
+				Log.d("MyGrid", "position:" + position);
 				holder.mImageView.setTag(R.id.imageView, getItem(position)
 						.getUrl());
 				holder.mImageView.setTag(R.id.gridView, position);
+				
+				// 1displayImage 两种方式的比较
+//				 displayImage(holder.mImageView, position);
+				// 2loadImage
 				loadImage(holder.mImageView, position);
 			}
 		} else if (getItemViewType(position) == VIEW_TYPE_FOOT && position != 0) {

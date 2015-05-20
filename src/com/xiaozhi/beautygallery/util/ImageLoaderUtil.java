@@ -9,6 +9,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.xiaozhi.beautygallery.R;
@@ -92,7 +93,7 @@ public class ImageLoaderUtil {
 				// .preProcessor(BitmapProcessor preProcessor)
 				.resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
 				// .displayer(new RoundedBitmapDisplayer(20))//是否设置为圆角，弧度为多少
-//				.displayer(new FadeInBitmapDisplayer(300))// 是否图片加载好后渐入的动画时间
+				.displayer(new FadeInBitmapDisplayer(300))// 是否图片加载好后渐入的动画时间
 				.build();// 构建完成
 		return options;
 	}
