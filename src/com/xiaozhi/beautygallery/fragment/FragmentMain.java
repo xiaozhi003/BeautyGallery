@@ -37,7 +37,8 @@ import com.xiaozhi.beautygallery.view.FooterView;
 public class FragmentMain extends Fragment {
 
 	private static final String TAG = "FragmentMain";
-	private int pn;// 加载的图片数量
+	/** 从第几项开始加载图片*/
+	private int pn;
 	private String tag2;
 	private String oldTag2;
 
