@@ -97,6 +97,7 @@ public class WelcomeActivity extends Activity {
 
 			@Override
 			public void onAnimationEnd(Animator animation) {
+				// 缩放动画结束开始模糊动画
 				blurAnimation();
 			}
 		});
