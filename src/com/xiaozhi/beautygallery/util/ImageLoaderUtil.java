@@ -43,6 +43,10 @@ public class ImageLoaderUtil {
 		mImageLoader = ImageLoader.getInstance();
 	}
 
+	public static void displayImage(String uri, ImageView imageView) {
+		mImageLoader.displayImage(uri, imageView);
+	}
+
 	public static void displayImage(String uri, ImageView imageView,
 			DisplayImageOptions options) {
 		mImageLoader.displayImage(uri, imageView, options);
