@@ -90,8 +90,6 @@ public class MyGridViewAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Log.i("Myadapter", "position:" + position);
-		Log.i("Myadapter", "getChildCount:" + parent.getChildCount());
 		if (convertView == null) {
 			convertView = initConvertView(position, convertView, parent);
 		}
@@ -192,7 +190,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 	}
 
 	/**
-	 * universal-imagelader的displayImage默认已经处理图片快速滑动错位的感觉
+	 * universal-imagelader的displayImage默认已经处理图片快速滑动错位
 	 * 但是加了默认的动画体验还是不太好，功能越完善性能就会下降
 	 * 
 	 * @param imageView
