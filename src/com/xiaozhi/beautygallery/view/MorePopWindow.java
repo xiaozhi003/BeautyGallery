@@ -73,7 +73,7 @@ public class MorePopWindow extends PopupWindow {
 		this.setFocusable(true);
 		// 设置SelectPicPopupWindow弹出窗体动画效果
 		// this.setAnimationStyle(R.style.popwin_anim_style);
-		// 实例化一个ColorDrawable颜色为半透明
+		// 实例化一个ColorDrawable颜色为透明
 		ColorDrawable dw = new ColorDrawable(0x00000000);
 		// 设置SelectPicPopupWindow弹出窗体的背景
 		this.setBackgroundDrawable(dw);
