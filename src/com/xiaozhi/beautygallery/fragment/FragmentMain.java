@@ -128,7 +128,7 @@ public class FragmentMain extends Fragment {
 
 					@Override
 					public void onErrorResponse(VolleyError arg0) {
-						Toast.makeText(getActivity(), "加载失败",
+						Toast.makeText(getActivity(), R.string.loading_error,
 								Toast.LENGTH_SHORT).show();
 						mFrame.refreshComplete();
 					}
