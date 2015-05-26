@@ -191,7 +191,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 
 	/**
 	 * universal-imagelader的displayImage默认已经处理图片快速滑动错位
-	 * 但是加了默认的动画体验还是不太好，功能越完善性能就会下降
+	 * 但是加了默认的动画体验还是不太好
 	 * 
 	 * @param imageView
 	 * @param position
