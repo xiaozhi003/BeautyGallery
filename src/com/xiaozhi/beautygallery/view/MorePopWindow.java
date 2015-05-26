@@ -88,6 +88,9 @@ public class MorePopWindow extends PopupWindow {
 		}
 	}
 
+	/**
+	 * 重写该方法，让内部视图在现实的时候加入出场动画
+	 */
 	@Override
 	public void showAsDropDown(View anchor) {
 		super.showAsDropDown(anchor);
@@ -96,6 +99,9 @@ public class MorePopWindow extends PopupWindow {
 		mMoreView.startAnimation(animation);
 	}
 
+	/**
+	 * 重写该方法，当内部视图动画结束的时候再调用父类的dismiss方法
+	 */
 	@Override
 	public void dismiss() {
 		Animation animation = AnimationUtils.loadAnimation(mContext,
