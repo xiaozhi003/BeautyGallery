@@ -28,8 +28,8 @@
     </style>
 
     <style name="popwin_anim_style">
-        <item name="android:windowEnterAnimation">@anim/abc_fade_in</item>
-        <item name="android:windowExitAnimation">@anim/abc_fade_out</item>
+        <item name="android:windowEnterAnimation">@anim/slide_top_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_top_out</item>
     </style>
 
 </resources>
