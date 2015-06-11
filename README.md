@@ -1,2 +1,3 @@
 # BeautyGallery
-beauty gallery
+-
+运用百度api整合大量开源项目，制作美女图片浏览器。该项目旨在完成一个完整的基于服务器的demo，当然也有个人的一些见解
