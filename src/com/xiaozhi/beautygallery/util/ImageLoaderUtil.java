@@ -51,6 +51,11 @@ public class ImageLoaderUtil {
 			DisplayImageOptions options) {
 		mImageLoader.displayImage(uri, imageView, options);
 	}
+	
+	public static void displayImage(String uri, ImageView imageView,
+			DisplayImageOptions options,ImageLoadingListener listener) {
+		mImageLoader.displayImage(uri, imageView, options,listener);
+	}
 
 	public static void displayImage(String uri, ImageAware imageAware) {
 		mImageLoader.displayImage(uri, imageAware);
