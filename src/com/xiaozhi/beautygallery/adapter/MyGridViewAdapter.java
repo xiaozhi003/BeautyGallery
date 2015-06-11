@@ -171,17 +171,11 @@ public class MyGridViewAdapter extends BaseAdapter {
 
 				@Override
 				public void onClick(final View v) {
-					new Handler().postDelayed(new Runnable() {
-
-						@Override
-						public void run() {
-							Intent intent = new Intent(mContext,
-									BeautyPagerActivity.class);
-							intent.putExtra(BeautyPagerActivity.POSITION,
-									(Integer) v.getTag(R.id.gridView));
-							mContext.startActivity(intent);
-						}
-					}, 200);
+					Intent intent = new Intent(mContext,
+							BeautyPagerActivity.class);
+					intent.putExtra(BeautyPagerActivity.POSITION,
+							(Integer) v.getTag(R.id.gridView));
+					mContext.startActivity(intent);
 				}
 			});
 			convertView.setTag(holder);
