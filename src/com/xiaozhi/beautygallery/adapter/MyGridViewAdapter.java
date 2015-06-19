@@ -5,6 +5,7 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,9 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader.ImageContainer;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.listener.SimpleImageLoadingListener;
 import com.xiaozhi.beautygallery.R;
@@ -26,6 +30,7 @@ import com.xiaozhi.beautygallery.domain.Image;
 import com.xiaozhi.beautygallery.util.ImageLoaderUtil;
 import com.xiaozhi.beautygallery.util.Logs;
 import com.xiaozhi.beautygallery.util.MeasureUtil;
+import com.xiaozhi.beautygallery.util.VolleyUtil;
 import com.xiaozhi.beautygallery.view.FooterView;
 
 /**
@@ -123,6 +128,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 				// displayImage(holder.mImageView, position);
 				// 2loadImage
 				loadImage(holder.mImageView, position);
+//				displayImageByVolley(holder.mImageView, position);
 			}
 		} else if (getItemViewType(position) == VIEW_TYPE_FOOT && position != 0) {
 			setFooterViewStatus(FooterView.MORE);
@@ -228,6 +234,30 @@ public class MyGridViewAdapter extends BaseAdapter {
 				super.onLoadingStarted(imageUri, view);
 				imageView.setImageResource(R.drawable.empty_photo);
 			}
+		});
+	}
+	
+	/**
+	 * 用volley加载图片
+	 */
+	private void displayImageByVolley(final ImageView imageView, final int position){
+		Animation animation = AnimationUtils.loadAnimation(mContext,
+				R.anim.anim_alpha);
+		imageView.startAnimation(animation);
+		VolleyUtil.getInstance().displayImage(getItem(position).getUrl(),new ImageListener() {
+			
+			@Override
+			public void onErrorResponse(VolleyError arg0) {
+				
+			}
+			
+			@Override
+			public void onResponse(ImageContainer arg0, boolean arg1) {
+				if (getItem(position).getUrl().equals(imageView.getTag(R.id.imageView))) {
+					imageView.setImageBitmap(arg0.getBitmap());
+				}
+			}
+			
 		});
 	}
 

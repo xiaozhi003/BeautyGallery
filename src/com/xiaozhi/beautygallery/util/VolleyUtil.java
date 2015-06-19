@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.v4.util.LruCache;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,9 +23,11 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageCache;
+import com.android.volley.toolbox.ImageLoader.ImageListener;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
+import com.xiaozhi.beautygallery.R;
 import com.xiaozhi.beautygallery.domain.Image;
 
 /*
@@ -83,6 +86,10 @@ public class VolleyUtil {
 
 	public <T> void addToRequestQueue(Request<T> req) {
 		getRequestQueue().add(req);
+	}
+	
+	public void displayImage(String url,ImageListener listener){
+		mImageLoader.get(url, listener);
 	}
 
 	public ImageLoader getImageLoader() {
