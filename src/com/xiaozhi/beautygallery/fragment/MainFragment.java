@@ -34,7 +34,7 @@ import com.xiaozhi.beautygallery.view.FooterView;
 /*
  * 显示图片列表Fragment
  */
-public class FragmentMain extends Fragment {
+public class MainFragment extends Fragment {
 
 	private static final String TAG = "FragmentMain";
 	/** 从第几项开始加载图片*/
