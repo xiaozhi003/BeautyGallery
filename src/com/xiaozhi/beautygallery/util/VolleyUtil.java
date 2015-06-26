@@ -1,6 +1,5 @@
 package com.xiaozhi.beautygallery.util;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,26 +7,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.R.integer;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Handler;
 import android.support.v4.util.LruCache;
-import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.Response.Listener;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageCache;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonObject;
-import com.xiaozhi.beautygallery.R;
 import com.xiaozhi.beautygallery.domain.Image;
 
 /*
@@ -39,6 +29,7 @@ public class VolleyUtil {
 	public static final String PREF_SEARCH_QUERY = "searchQuery";
 	public static final String PREF_LAST_RESULT_ID = "lastResultId";
 	public static final String TAG2_DEFAULT = "性感美女";
+	public static List<Image> mImages = new ArrayList<Image>();
 
 	private static final String ENDPOINT = "http://image.baidu.com/channel/listjson";
 	private static final String PN = "pn";
@@ -137,7 +128,7 @@ public class VolleyUtil {
 	 * @param listImages
 	 * @param jo
 	 */
-	public static void parseItems(List<Image> listImages, JSONObject jo) {
+	public static void parseItems(JSONObject jo) {
 		try {
 			JSONArray jsonArray = jo.getJSONArray("data");
 			int jsonLength = jsonArray.length();
@@ -147,13 +138,17 @@ public class VolleyUtil {
 					String id = dataObject.getString("id");
 					String caption = dataObject.getString("desc");
 					String smalUrl = dataObject.getString("share_url");
+					int width = dataObject.getInt("image_width");
+					int height = dataObject.getInt("image_height");
 
 					Image item = new Image();
 					item.setId(id);
 					item.setDescription(caption);
 					item.setUrl(smalUrl);
+					item.setWidth(width);
+					item.setHeight(height);
 
-					listImages.add(item);
+					mImages.add(item);
 				}
 			}
 		} catch (JSONException e) {

@@ -138,7 +138,7 @@ public class WelcomeActivity extends Activity {
 
 			@Override
 			public void run() {
-				startActivity(new Intent(mActivity, MainActivity.class));
+				startActivity(new Intent(mActivity, MainRecycleActivity.class));
 				mActivity.finish();
 			}
 		}, 1000);

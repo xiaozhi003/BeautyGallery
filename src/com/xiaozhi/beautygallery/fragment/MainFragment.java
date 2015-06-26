@@ -5,9 +5,6 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.json.JSONObject;
 
 import android.os.Bundle;
@@ -26,7 +23,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.xiaozhi.beautygallery.R;
 import com.xiaozhi.beautygallery.adapter.MyGridViewAdapter;
 import com.xiaozhi.beautygallery.adapter.MyGridViewAdapter.LoadListener;
-import com.xiaozhi.beautygallery.domain.Image;
 import com.xiaozhi.beautygallery.util.CustomUtil;
 import com.xiaozhi.beautygallery.util.VolleyUtil;
 import com.xiaozhi.beautygallery.view.FooterView;
@@ -44,7 +40,6 @@ public class MainFragment extends Fragment {
 
 	private GridView mGridView;
 	private MyGridViewAdapter mAdapter;
-	public static List<Image> mListImages = new ArrayList<Image>();
 	private View view;
 	private PtrFrameLayout mFrame;
 
@@ -65,7 +60,7 @@ public class MainFragment extends Fragment {
 		}
 		oldTag2 = tag2;
 		mGridView = (GridView) view.findViewById(R.id.gridView);
-		mAdapter = new MyGridViewAdapter(getActivity(), mListImages);
+		mAdapter = new MyGridViewAdapter(getActivity(), VolleyUtil.mImages);
 		mAdapter.setLoadListener(new LoadListener() {
 
 			@Override
@@ -99,7 +94,7 @@ public class MainFragment extends Fragment {
 
 			@Override
 			public void onRefreshBegin(PtrFrameLayout frame) {
-				mListImages.clear();
+				VolleyUtil.mImages.clear();
 				pn = 0;
 				if (!oldTag2.equals(tag2)) {
 					CustomUtil.getInstance().save(VolleyUtil.TAG2, tag2);
@@ -120,7 +115,7 @@ public class MainFragment extends Fragment {
 
 					@Override
 					public void onResponse(JSONObject jsonObject) {
-						VolleyUtil.parseItems(mListImages, jsonObject);
+						VolleyUtil.parseItems(jsonObject);
 						mFrame.refreshComplete();
 						updateAdapter();
 						mAdapter.setFooterViewStatus(FooterView.MORE);

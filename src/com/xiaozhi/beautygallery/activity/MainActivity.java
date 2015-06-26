@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.xiaozhi.beautygallery.R;
-import com.xiaozhi.beautygallery.fragment.FragmentMain;
+import com.xiaozhi.beautygallery.fragment.MainFragment;
 import com.xiaozhi.beautygallery.view.MorePopWindow;
 import com.xiaozhi.beautygallery.view.MorePopWindow.OnMorePopWindowItemClickListener;
 
@@ -35,8 +35,8 @@ public class MainActivity extends SingleFragmentActivity {
 
 					@Override
 					public void onItemClick(int position, String item) {
-						if (mFragment instanceof FragmentMain) {
-							((FragmentMain) mFragment)
+						if (mFragment instanceof MainFragment) {
+							((MainFragment) mFragment)
 									.changeOtherBeautyType(item);
 						}
 					}
@@ -84,7 +84,7 @@ public class MainActivity extends SingleFragmentActivity {
 
 	@Override
 	protected Fragment createFragment() {
-		mFragment = new FragmentMain();
+		mFragment = new MainFragment();
 		return mFragment;
 	}
 }

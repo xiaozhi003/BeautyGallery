@@ -10,6 +10,8 @@ public class Image {
 	private String mId;
 	private String mUrl;
 	private String mDescription;
+	private int mWidth;
+	private int mHeight;
 
 	public String getId() {
 		return mId;
@@ -33,6 +35,22 @@ public class Image {
 
 	public void setDescription(String description) {
 		mDescription = description;
+	}
+
+	public int getWidth() {
+		return mWidth;
+	}
+
+	public void setWidth(int width) {
+		mWidth = width;
+	}
+
+	public int getHeight() {
+		return mHeight;
+	}
+
+	public void setHeight(int height) {
+		mHeight = height;
 	}
 
 }

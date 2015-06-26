@@ -37,6 +37,8 @@ import com.xiaozhi.beautygallery.view.FooterView;
  * @author Xiaozhi
  */
 public class MyGridViewAdapter extends BaseAdapter {
+	
+	private static final String TAG = "MyGridViewAdapter";
 
 	/** 图片视图类型 */
 	public static final int VIEW_TYPE_ITEM = 0;
@@ -111,6 +113,7 @@ public class MyGridViewAdapter extends BaseAdapter {
 	private void setDataToConvertView(int position, View convertView) {
 		if (getItemViewType(position) == VIEW_TYPE_ITEM) {
 			ViewHolder holder = (ViewHolder) convertView.getTag();
+			Log.i(TAG, "holder position:" + position + holder.mImageView);
 			/**
 			 * 此处的判断是为了避免调用notifyDataSetChanged所有的view都要重新setImageBitmap
 			 * 导致闪动也就是做了我们的渐入动画
