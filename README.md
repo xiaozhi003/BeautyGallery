@@ -5,5 +5,7 @@
 ![效果图](http://img.my.csdn.net/uploads/201505/25/1432541906_3805.gif)  
 ![效果图](http://img.my.csdn.net/uploads/201505/25/1432541907_6815.gif)
 ![效果图](http://img.my.csdn.net/uploads/201505/25/1432541908_4250.gif)  
+![效果图](http://img.my.csdn.net/uploads/201506/27/1435413331_8826.gif)  
+
 # Blog
 **CSDN Blog: http://blog.csdn.net/xiaozhiwz/article/details/45970893**
