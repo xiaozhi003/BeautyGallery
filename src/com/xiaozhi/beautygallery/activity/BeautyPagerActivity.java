@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 import com.xiaozhi.beautygallery.R;
 import com.xiaozhi.beautygallery.fragment.BeautyFragment;
@@ -14,18 +16,18 @@ public class BeautyPagerActivity extends AppCompatActivity {
 
 	public static final String POSITION = "position";
 
-	private ViewPager mViewPager;
+	@Bind(R.id.viewPager)
+	ViewPager mViewPager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_beauty_pager);
-
+		ButterKnife.bind(this);
 		initViews();
 	}
 
 	private void initViews() {
-		mViewPager = (ViewPager) findViewById(R.id.viewPager);
 		mViewPager.setAdapter(new FragmentStatePagerAdapter(
 				getSupportFragmentManager()) {
 

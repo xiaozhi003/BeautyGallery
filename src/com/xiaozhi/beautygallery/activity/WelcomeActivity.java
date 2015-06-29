@@ -20,6 +20,8 @@ import android.view.View;
 import android.view.ViewTreeObserver.OnPreDrawListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 import com.enrique.stackblur.StackBlurManager;
 import com.xiaozhi.beautygallery.R;
@@ -32,9 +34,12 @@ import com.xiaozhi.beautygallery.R;
 public class WelcomeActivity extends Activity {
 
 	private WelcomeActivity mActivity;
-	private ImageView mWelcomeImg;
-	private View mBlurView;
-	private TextView mBlurTextView;
+	@Bind(R.id.welcomeImg)
+	ImageView mWelcomeImg;
+	@Bind(R.id.blurView)
+	View mBlurView;
+	@Bind(R.id.blurTextView)
+	TextView mBlurTextView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +47,11 @@ public class WelcomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
 		mActivity = this;
-
+		ButterKnife.bind(this);
 		initViews();
 	}
 
 	private void initViews() {
-		mWelcomeImg = (ImageView) findViewById(R.id.welcomeImg);
-		mBlurView = findViewById(R.id.blurView);
-		mBlurTextView = (TextView) findViewById(R.id.blurTextView);
-
 		mWelcomeImg.getViewTreeObserver().addOnPreDrawListener(
 				new OnPreDrawListener() {
 

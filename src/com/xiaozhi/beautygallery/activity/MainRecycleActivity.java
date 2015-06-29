@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 import com.xiaozhi.beautygallery.R;
 import com.xiaozhi.beautygallery.fragment.MainFragment;
@@ -16,18 +18,19 @@ import com.xiaozhi.beautygallery.view.MorePopWindow.OnMorePopWindowItemClickList
 
 public class MainRecycleActivity extends SingleFragmentActivity {
 
-	private Toolbar mToolbar;
+	@Bind(R.id.toolbar)
+	Toolbar mToolbar;
 	private MorePopWindow mMorePopWindow;
 	private Fragment mFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ButterKnife.bind(this);
 		initViews();
 	}
 
 	protected void initViews() {
-		mToolbar = (Toolbar) findViewById(R.id.toolbar);
 		mToolbar.setVisibility(View.VISIBLE);
 		setSupportActionBar(mToolbar);
 		mMorePopWindow = new MorePopWindow(this);
